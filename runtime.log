@@ -1,0 +1,91 @@
+2020-07-29 22:03:55.437 | INFO     | __main__:run:13 - Listening on 8000
+2020-07-29 22:09:45.511 | INFO     | __main__:run:13 - Listening on 8000
+2020-07-29 22:10:15.036 | INFO     | storages.redisclient:random:81 - Successfully Get Random Proxy From Redis: 192.168.1.2:6666
+2020-07-29 22:10:42.281 | INFO     | __main__:run:13 - Listening on 8000
+2020-07-29 22:11:03.822 | INFO     | storages.redisclient:random:81 - Successfully Get Random Proxy From Redis: 192.168.1.3:7777
+2020-07-29 22:11:06.580 | INFO     | storages.redisclient:random:81 - Successfully Get Random Proxy From Redis: 192.168.1.1:8888
+2020-07-29 22:11:09.065 | INFO     | storages.redisclient:random:81 - Successfully Get Random Proxy From Redis: 192.168.1.1:8888
+2020-07-29 22:11:12.963 | INFO     | storages.redisclient:random:81 - Successfully Get Random Proxy From Redis: 192.168.1.2:6666
+2020-07-29 22:11:36.224 | INFO     | storages.redisclient:random:81 - Successfully Get Random Proxy From Redis: 192.168.1.3:7777
+2020-07-30 15:40:12.056 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:40:14.069 | INFO     | checker.check:test_proxy:26 - Testing Proxy, adsl1, 192.168.1.1:8888
+2020-07-30 15:40:14.091 | INFO     | checker.check:test_proxy:26 - Testing Proxy, adsl2, 192.168.1.2:6666
+2020-07-30 15:40:14.092 | INFO     | checker.check:test_proxy:26 - Testing Proxy, adsl3, 192.168.1.3:7777
+2020-07-30 15:40:16.097 | ERROR    | checker.check:test_proxy:40 - Cannot connect to host 192.168.1.3:7777 ssl:None [Connect call failed ('192.168.1.3', 7777)]
+2020-07-30 15:40:16.100 | INFO     | checker.check:test_proxy:41 - InValid Proxy, adsl3
+2020-07-30 15:40:18.107 | INFO     | checker.check:test_proxy:44 - Remove Proxy From Redis Successfully, adsl3
+2020-07-30 15:40:18.109 | ERROR    | checker.check:test_proxy:40 - Cannot connect to host 192.168.1.1:8888 ssl:None [Connect call failed ('192.168.1.1', 8888)]
+2020-07-30 15:40:18.110 | INFO     | checker.check:test_proxy:41 - InValid Proxy, adsl1
+2020-07-30 15:40:20.122 | INFO     | checker.check:test_proxy:44 - Remove Proxy From Redis Successfully, adsl1
+2020-07-30 15:40:35.096 | ERROR    | checker.check:test_proxy:40 - Cannot connect to host 192.168.1.2:6666 ssl:None [Connect call failed ('192.168.1.2', 6666)]
+2020-07-30 15:40:35.097 | INFO     | checker.check:test_proxy:41 - InValid Proxy, adsl2
+2020-07-30 15:40:37.106 | INFO     | checker.check:test_proxy:44 - Remove Proxy From Redis Successfully, adsl2
+2020-07-30 15:40:47.108 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:40:49.117 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 15:43:07.537 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:43:09.549 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 15:45:55.624 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:45:57.636 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 15:45:57.638 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:45:59.647 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 15:45:59.648 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:46:01.656 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 15:46:01.657 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:46:03.666 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 15:46:03.667 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:46:29.685 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:46:31.701 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 15:46:31.702 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:46:33.710 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 15:46:33.711 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:46:35.720 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 15:46:35.721 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:46:37.728 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 15:46:37.728 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:47:15.665 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:47:17.676 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 15:47:27.678 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:47:29.686 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 15:47:39.687 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:47:41.695 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 15:47:51.696 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:47:53.703 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 15:49:21.818 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:49:23.831 | INFO     | checker.check:test_proxy:26 - Testing Proxy, adsl1, 192.168.1.1:8888
+2020-07-30 15:49:23.871 | INFO     | checker.check:test_proxy:26 - Testing Proxy, adsl2, 192.168.1.2:6666
+2020-07-30 15:49:23.872 | INFO     | checker.check:test_proxy:26 - Testing Proxy, adsl3, 192.168.1.3:7777
+2020-07-30 15:49:25.878 | ERROR    | checker.check:test_proxy:40 - Cannot connect to host 192.168.1.3:7777 ssl:None [Connect call failed ('192.168.1.3', 7777)]
+2020-07-30 15:49:25.880 | INFO     | checker.check:test_proxy:41 - InValid Proxy, adsl3
+2020-07-30 15:49:27.888 | INFO     | checker.check:test_proxy:44 - Remove Proxy From Redis Successfully, adsl3
+2020-07-30 15:49:27.890 | ERROR    | checker.check:test_proxy:40 - Cannot connect to host 192.168.1.1:8888 ssl:None [Connect call failed ('192.168.1.1', 8888)]
+2020-07-30 15:49:27.894 | INFO     | checker.check:test_proxy:41 - InValid Proxy, adsl1
+2020-07-30 15:49:29.902 | INFO     | checker.check:test_proxy:44 - Remove Proxy From Redis Successfully, adsl1
+2020-07-30 15:49:44.876 | ERROR    | checker.check:test_proxy:40 - Cannot connect to host 192.168.1.2:6666 ssl:None [Connect call failed ('192.168.1.2', 6666)]
+2020-07-30 15:49:44.878 | INFO     | checker.check:test_proxy:41 - InValid Proxy, adsl2
+2020-07-30 15:49:46.886 | INFO     | checker.check:test_proxy:44 - Remove Proxy From Redis Successfully, adsl2
+2020-07-30 15:49:56.888 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:49:58.897 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 15:50:08.899 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:50:10.906 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 15:50:20.908 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 15:50:22.916 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 16:02:10.309 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 16:02:10.309 | INFO     | __mp_main__:start_server:27 - Listening on 8000
+2020-07-30 16:02:12.319 | INFO     | checker.check:test_proxy:26 - Testing Proxy, adsl1, 192.168.1.1:8888
+2020-07-30 16:02:12.338 | INFO     | checker.check:test_proxy:26 - Testing Proxy, adsl2, 192.168.1.2:6666
+2020-07-30 16:02:12.340 | INFO     | checker.check:test_proxy:26 - Testing Proxy, adsl3, 192.168.1.3:7777
+2020-07-30 16:02:14.348 | ERROR    | checker.check:test_proxy:40 - Cannot connect to host 192.168.1.3:7777 ssl:None [Connect call failed ('192.168.1.3', 7777)]
+2020-07-30 16:02:14.349 | INFO     | checker.check:test_proxy:41 - InValid Proxy, adsl3
+2020-07-30 16:02:16.354 | INFO     | checker.check:test_proxy:44 - Remove Proxy From Redis Successfully, adsl3
+2020-07-30 16:02:16.355 | ERROR    | checker.check:test_proxy:40 - Cannot connect to host 192.168.1.1:8888 ssl:None [Connect call failed ('192.168.1.1', 8888)]
+2020-07-30 16:02:16.356 | INFO     | checker.check:test_proxy:41 - InValid Proxy, adsl1
+2020-07-30 16:02:18.362 | INFO     | checker.check:test_proxy:44 - Remove Proxy From Redis Successfully, adsl1
+2020-07-30 16:02:33.348 | ERROR    | checker.check:test_proxy:40 - Cannot connect to host 192.168.1.2:6666 ssl:None [Connect call failed ('192.168.1.2', 6666)]
+2020-07-30 16:02:33.350 | INFO     | checker.check:test_proxy:41 - InValid Proxy, adsl2
+2020-07-30 16:02:35.358 | INFO     | checker.check:test_proxy:44 - Remove Proxy From Redis Successfully, adsl2
+2020-07-30 16:02:45.360 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 16:02:47.368 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 16:02:57.369 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 16:02:59.376 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-30 16:03:09.378 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-30 16:03:11.389 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
