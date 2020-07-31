@@ -5,6 +5,7 @@ import re
 import time
 import requests
 from loguru import logger
+from retrying import retry
 from storages.redisclient import RedisClient
 from requests.exceptions import ConnectionError
 
@@ -28,6 +29,7 @@ class Getter(object):
         """初始化"""
         self.db = RedisClient()
         self.client_name = client_name
+        self.flag = False
 
     @staticmethod
     def get_ip(if_name=IFNAME):
@@ -78,6 +80,48 @@ class Getter(object):
     #     if self.db.set(self.client_name, proxy):
     #         # 保存成功
     #         logger.info('Proxy Save Successfully', proxy)
+    @staticmethod
+    @retry(retry_on_result=lambda x: x is not True, stop_max_attempt_number=3)
+    def remove_proxy():
+        try:
+            with requests.get(
+                    url=SERVER_URL+'/' + CLIENT_NAME,
+            ) as response:
+                if response.status_code == 200:
+                    logger.info(f'Successfully Sent to Server, {SERVER_URL}')
+        except ConnectionError:
+            logger.error(f'Failed to Connect Server, {SERVER_URL}')
+
+    def vps_dialing(self):
+        # 执行vps动态拨号脚本
+        (status, output) = subprocess.getstatusoutput(ADSL_BASH)
+        if 0 == status:
+            logger.info('ADSL Successfully')
+            # 获取动态拨号长生的ip
+            ip = self.get_ip()
+            if ip:
+                logger.info(f'New IP, {ip}')
+                try:
+                    with requests.post(
+                            url=SERVER_URL,
+                            data={
+                                'token': TOKEN,
+                                'port': PROXY_PORT,
+                                'name': CLIENT_NAME
+                            }
+                    ) as response:
+                        if response.status_code == 200:
+                            logger.info(f'Successfully Sent to Server, {SERVER_URL}')
+                except ConnectionError:
+                    logger.error(f'Failed to Connect Server, {SERVER_URL}')
+                time.sleep(ADSL_CYCLE)
+
+            else:
+                logger.error('Git IP Failed, Try Again')
+                time.sleep(ADSL_ERROR_CYCLE)
+        else:
+            logger.error('ADSL Dailing Failed, Please Check')
+            time.sleep(ADSL_ERROR_CYCLE)
 
     def run(self):
         """
@@ -86,35 +130,13 @@ class Getter(object):
         """
         while True:
             logger.info('ADSL Start, Please Wait')
-            # 执行vps动态拨号脚本
-            (status, output) = subprocess.getstatusoutput(ADSL_BASH)
-            if 0 == status:
-                logger.info('ADSL Successfully')
-                # 获取动态拨号长生的ip
-                ip = self.get_ip()
-                if ip:
-                    logger.info(f'New IP, {ip}')
-                    try:
-                        with requests.post(
-                            url=SERVER_URL,
-                            data={
-                                'token': TOKEN,
-                                'port': PROXY_PORT,
-                                'name': CLIENT_NAME
-                            }
-                        ) as response:
-                            if response.status_code == 200:
-                                logger.info(f'Successfully Sent to Server, {SERVER_URL}')
-                    except ConnectionError:
-                        logger.error(f'Failed to Connect Server, {SERVER_URL}')
-                    time.sleep(ADSL_CYCLE)
-
-                else:
-                    logger.error('Git IP Failed, Try Again')
-                    time.sleep(ADSL_ERROR_CYCLE)
+            if not self.flag:
+                self.flag = True
+                self.vps_dialing()
             else:
-                logger.error('ADSL Dailing Failed, Please Check')
-                time.sleep(ADSL_ERROR_CYCLE)
+                logger.info('Removing Proxy, Please Wait')
+                self.remove_proxy()
+                self.vps_dialing()
 
 
 if __name__ == '__main__':
