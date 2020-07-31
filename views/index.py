@@ -10,7 +10,7 @@ from tornado.curl_httpclient import CurlAsyncHTTPClient
 
 import sys
 sys.path.append('..')
-from config import TEST_URL, TOKEN
+from config import TEST_URL, TOKEN, CLIENT_NAME
 
 
 class MainHandler(RequestHandler):
@@ -71,6 +71,10 @@ class MainHandler(RequestHandler):
             self.write('No Client Port')
 
     def get(self, api):
+        if api == CLIENT_NAME:
+            res = self.redis.remove(CLIENT_NAME)
+            if res:
+                self.write('Removing Proxy Successfully')
         if api == 'random':
             result = self.redis.random()
             if result:
@@ -78,5 +82,8 @@ class MainHandler(RequestHandler):
 
         if api == 'counts':
             self.write(str(self.redis.count()))
+
+
+
 
 
