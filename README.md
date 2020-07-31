@@ -1,5 +1,7 @@
 ## VPSProxyPool
-![](https://img.shields.io/badge/python-3.7%2B-brightgreen)
+![](https://img.shields.io/badge/python-3.7%2B-brightgreen) 
+![](https://img.shields.io/badge/reids-4.0.9%2B-brightgreen)
+![](https://img.shields.io/badge/CentOS-7.6%2B-brightgreen)
 
 ADSL拨号代理池
 
@@ -47,11 +49,100 @@ ADSL拨号代理池
 ```
 cd VPSProxyPool
 python client.py
+
+2020-07-31 14:46:39.759 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-31 14:46:39.762 | INFO     | __main__:start_server:26 - Listening on 8000
+2020-07-31 14:46:39.764 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-31 14:47:12.667 | INFO     | views.index:post:60 - Receive proxy, 27.8.17.48:8888
+2020-07-31 14:47:12.668 | INFO     | views.index:post:65 - Saving proxy To Redis Successfully, 27.8.17.48:8888
+2020-07-31 14:47:39.775 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-31 14:47:39.776 | INFO     | checker.check:test_proxy:26 - Testing Proxy, adsl1, 27.8.17.48:8888
+2020-07-31 14:47:56.275 | INFO     | checker.check:test_proxy:38 - Valid Proxy, adsl1
+2020-07-31 14:48:56.303 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-31 14:48:56.304 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-31 14:49:20.945 | INFO     | views.index:post:60 - Receive proxy, 27.10.158.162:8888
+2020-07-31 14:49:20.945 | INFO     | views.index:post:65 - Saving proxy To Redis Successfully, 27.10.158.162:8888
+2020-07-31 14:49:56.322 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-31 14:49:56.323 | INFO     | checker.check:test_proxy:26 - Testing Proxy, adsl1, 27.10.158.162:8888
+2020-07-31 14:50:09.386 | INFO     | checker.check:test_proxy:38 - Valid Proxy, adsl1
+... ...
+
 ```
+* 启动vps拨号主机状态如下图所示：
+
+![Image text](https://raw.githubusercontent.com/qiucl1001/VPSProxyPool/master/images/vps%E6%8B%A8%E5%8F%B7%E7%AB%AF.png)
+
 * 腾讯云服务器端
 ```
 cd VPSProxyPool
 python server.py
+
+2020-07-31 14:46:39.759 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-31 14:46:39.762 | INFO     | __main__:start_server:26 - Listening on 8000
+2020-07-31 14:46:39.764 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-31 14:47:12.667 | INFO     | views.index:post:60 - Receive proxy, 27.8.17.48:8888
+2020-07-31 14:47:12.668 | INFO     | views.index:post:65 - Saving proxy To Redis Successfully, 27.8.17.48:8888
+2020-07-31 14:47:39.775 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-31 14:47:39.776 | INFO     | checker.check:test_proxy:26 - Testing Proxy, adsl1, 27.8.17.48:8888
+2020-07-31 14:47:56.275 | INFO     | checker.check:test_proxy:38 - Valid Proxy, adsl1
+2020-07-31 14:48:56.303 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-31 14:48:56.304 | INFO     | checker.check:get_proxies:21 - Proxies Empty!
+2020-07-31 14:49:20.945 | INFO     | views.index:post:60 - Receive proxy, 27.10.158.162:8888
+2020-07-31 14:49:20.945 | INFO     | views.index:post:65 - Saving proxy To Redis Successfully, 27.10.158.162:8888
+2020-07-31 14:49:56.322 | INFO     | checker.check:get_proxies:16 - Get Proxies
+2020-07-31 14:49:56.323 | INFO     | checker.check:test_proxy:26 - Testing Proxy, adsl1, 27.10.158.162:8888
+2020-07-31 14:50:09.386 | INFO     | checker.check:test_proxy:38 - Valid Proxy, adsl1
+... ...
+
 ```
+* 启动腾讯云服务器端状态如下图所示：
+![Image Text](https://raw.githubusercontent.com/qiucl1001/VPSProxyPool/master/images/%E8%85%BE%E8%AE%AF%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF.png)
+
+* 服务器端Redis数据库ip代理状态，这里保存到14号数据库
+    ![Image Text](https://raw.githubusercontent.com/qiucl1001/VPSProxyPool/master/images/proxy1.png)
+    
+    ![Image Text](https://raw.githubusercontent.com/qiucl1001/VPSProxyPool/master/images/proxy2.png)
+
+### 获取代理代码使用样例
+
+1. 代码样例
+```python
+import requests
 
 
+def get_proxy():
+    with requests.get(
+        url='http://129.28.145.3:8000/random',  # 代理服务器所在地址
+        headers={
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) \
+             Chrome/83.0.4103.97 Safari/537.36'
+        }
+    ) as response:
+        if response.status_code == 200:
+            proxy = response.text
+            return proxy
+
+
+def get_page_source():
+    with requests.post(
+        url='https://www.renren.com/prefile...',  # 抓取连接页地址
+        headers={
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) \
+             Chrome/83.0.4103.97 Safari/537.36'
+        },
+        proxies={
+            'http': 'http://' + get_proxy(),
+            'https': 'https://' + get_proxy()
+        }
+    ) as response:
+        if response.status_code  in [200, 201, 304]:
+            html = response.text
+            print(html)
+
+
+if __name__ == '__main__':
+    get_page_source()
+
+```
+2. GUI样例如下图所示：
+![Image Text](https://raw.githubusercontent.com/qiucl1001/VPSProxyPool/master/images/%E8%8E%B7%E5%8F%96ip%E4%BB%A3%E7%90%86.png)
