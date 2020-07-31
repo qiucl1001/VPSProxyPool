@@ -5,7 +5,7 @@ import re
 import time
 import requests
 from loguru import logger
-from retrying import retry
+from retrying import retry, RetryError
 from storages.redisclient import RedisClient
 from requests.exceptions import ConnectionError
 
@@ -89,8 +89,12 @@ class Getter(object):
             ) as response:
                 if response.status_code == 200:
                     logger.info(f'Successfully Sent to Server, {SERVER_URL}')
+                    return True
         except ConnectionError:
             logger.error(f'Failed to Connect Server, {SERVER_URL}')
+            time.sleep(1)
+        except RetryError:
+            raise RetryError
 
     def vps_dialing(self):
         # 执行vps动态拨号脚本
@@ -135,7 +139,10 @@ class Getter(object):
                 self.vps_dialing()
             else:
                 logger.info('Removing Proxy, Please Wait')
-                self.remove_proxy()
+                try:
+                    self.remove_proxy()
+                except RetryError:
+                    self.vps_dialing()
                 self.vps_dialing()
 
 
